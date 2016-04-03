@@ -20,13 +20,13 @@ fullData = read.table(unz(zipfile,"household_power_consumption.txt"),header=T,se
 periodData<-fullData[fullData$Date %in% c("1/2/2007","2/2/2007"),]
 
 ##################################################
-# plot 1 is a histogram of the Global_active_power
+# plot 2 is a chart of Global_active_power versus Day of week / time
 
-# Create a date combining the date and time - not needed for this one
-# periodData$useDate<-strptime(paste(periodData$Date,periodData$Time, sep=" "),format = "%d/%m/%Y %H:%M:%S")
+# Create a date combining the date and time
+periodData$useDate<-strptime(paste(periodData$Date,periodData$Time, sep=" "),format = "%d/%m/%Y %H:%M:%S")
 
-png("plot1.png",width=480, height=480)
 
-hist(as.numeric(periodData$Global_active_power), col="red",main = "Global Active Power", xlab = "Global Active Power (kilowatts)")
+png("plot2.png",width=480, height=480)
+plot(periodData$useDate,as.numeric(periodData$Global_active_power),type="l", xlab = "",ylab="Global Active Power (kilowatts)")
 dev.off()
 
